@@ -31,6 +31,7 @@
                 //"view/videoStatsView.js",
                 //"model/videoStatsModel.js",
                 "boot.js"
+                //"http://www.youtube.com/player_api"
             ]
         }
     ],
