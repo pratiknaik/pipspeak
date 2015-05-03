@@ -11,6 +11,7 @@
 
 #pipspeak_comment {
 	height: 32px;
+	overflow: hidden;
 }
 
 #pipspeak_emote1:hover, #pipspeak_emote2:hover, #pipspeak_emote3:hover, #pipspeak_emote4:hover, #pipspeak_emote5:hover {

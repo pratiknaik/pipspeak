@@ -80,12 +80,13 @@ function returnTime(time) {
 }
 
 function parseComment(time, message) {	
-	var postedMessage = message.replace('<<1>>', ' <img src="chrome-extension://' + ext_id + '/img/emote1.png" /> ');
-	postedMessage = postedMessage.replace('<<2>>', ' <img src="chrome-extension://' + ext_id + '/img/emote2.png" /> ');
-	postedMessage = postedMessage.replace('<<3>>', ' <img src="chrome-extension://' + ext_id + '/img/emote3.png" /> ');
-	postedMessage = postedMessage.replace('<<4>>', ' <img src="chrome-extension://' + ext_id + '/img/emote4.png" /> ');
-	postedMessage = postedMessage.replace('<<5>>', ' <img src="chrome-extension://' + ext_id + '/img/emote5.png" /> ');
-	return "<code>" + returnTime(time) + "</code> " + postedMessage;
+	var postedMessage = message.replace(/<<1>>/g, ' <img src="chrome-extension://' + ext_id + '/img/emote1.png" /> ');
+	postedMessage = postedMessage.replace(/<<2>>/g, ' <img src="chrome-extension://' + ext_id + '/img/emote2.png" /> ');
+	postedMessage = postedMessage.replace(/<<3>>/g, ' <img src="chrome-extension://' + ext_id + '/img/emote3.png" /> ');
+	postedMessage = postedMessage.replace(/<<4>>/g, ' <img src="chrome-extension://' + ext_id + '/img/emote4.png" /> ');
+	postedMessage = postedMessage.replace(/<<5>>/g, ' <img src="chrome-extension://' + ext_id + '/img/emote5.png" /> ');
+	return "<table style='height: 100%;'><tr><td style='vertical-align: middle;'><code>" + returnTime(time) + "\
+		</code></td><td style='vertical-align: middle;'>" + postedMessage + "</td></tr></table>";
 }
 
 $(document).ready(function() {
@@ -112,28 +113,48 @@ $(document).ready(function() {
 	});
 
 	$("#watch7-content").on("click", "#pipspeak_emote1", function() {
-		$("#pipspeak_comment").html(parseComment(currentTime, "<<1>>"));
-	    addComment("<<1>>");
+		data = "<<1>>";
+		$("#pipspeak_comment").slideUp(function() {
+        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+    		$("#pipspeak_comment").slideDown();
+        });
+        addComment(data);
 	});
 
 	$("#watch7-content").on("click", "#pipspeak_emote2", function() {
-		$("#pipspeak_comment").html(parseComment(currentTime, "<<2>>"));
-	    addComment("<<2>>");
+		data = "<<2>>";
+		$("#pipspeak_comment").slideUp(function() {
+        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+    		$("#pipspeak_comment").slideDown();
+        });
+        addComment(data);
 	});
 
 	$("#watch7-content").on("click", "#pipspeak_emote3", function() {
-		$("#pipspeak_comment").html(parseComment(currentTime, "<<3>>"));
-	    addComment("<<3>>");
+		data = "<<3>>";
+		$("#pipspeak_comment").slideUp(function() {
+        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+    		$("#pipspeak_comment").slideDown();
+        });
+        addComment(data);
 	});
 
 	$("#watch7-content").on("click", "#pipspeak_emote4", function() {
-		$("#pipspeak_comment").html(parseComment(currentTime, "<<4>>"));
-	    addComment("<<4>>");
+		data = "<<4>>";
+		$("#pipspeak_comment").slideUp(function() {
+        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+    		$("#pipspeak_comment").slideDown();
+        });
+        addComment(data);
 	});
 
 	$("#watch7-content").on("click", "#pipspeak_emote5", function() {
-		$("#pipspeak_comment").html(parseComment(currentTime, "<<5>>"));
-	    addComment("<<5>>");
+		data = "<<5>>";
+		$("#pipspeak_comment").slideUp(function() {
+        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+    		$("#pipspeak_comment").slideDown();
+        });
+        addComment(data);
 	});
 
 	var url = false; 
@@ -259,9 +280,19 @@ setInterval(function() {
 	// https://github.com/borismus/keysocket/issues/63
     var video = document.getElementsByTagName('video')[0];
     currentTime = Math.floor(video.currentTime);
+
+    var lastCurTime = 0;
+    var message = "";
     for (var i = 0; i < comments.rows.length; i++) {
     	if(comments.rows.item(i).time == currentTime) {
-			$('#pipspeak_comment').html(parseComment(currentTime, comments.rows.item(i).comment));
+    		if(lastCurTime == currentTime) {
+    			if(message === "") message = comments.rows.item(i).comment;
+				else message += " | " + comments.rows.item(i).comment;
+			} else {
+				message = comments.rows.item(i).comment;
+			}
+    		lastCurTime = currentTime;
+    		$('#pipspeak_comment').html(parseComment(currentTime, message));
     	}
     }
 }, 1000);
