@@ -22,7 +22,8 @@
     "content_scripts": [
         {
             "matches": ["*://www.youtube.com/*"],
-            "css": [ "css/bootstrap.css" ],
+            "css": [ "css/bootstrap.css",
+                        "css/pipspeak.css" ],
             "js": [
                 //"js/EnhanceNatives.js",
                 "lib/jquery.min.js",
@@ -41,6 +42,11 @@
     //"content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://d2dq2ahtl5zl1z.cloudfront.net/; object-src 'self'",
 
     "web_accessible_resources": [
+        "img/emote1.png",
+        "img/emote2.png",
+        "img/emote3.png",
+        "img/emote4.png",
+        "img/emote5.png"
         //"images/download-icon.png",
         //"images/asterisk-white-icon.png",
         //"images/graph-blurred.png",
