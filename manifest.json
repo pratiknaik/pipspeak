@@ -8,8 +8,12 @@
     "homepage_url": "http://you.com",
 
     "icons": {
-        //"48": "images/icon48.png",
-        //"128": "images/icon128.png"
+        "16": "img/pipspeakx16.png",
+        "32": "img/pipspeakx32.png",
+        "64": "img/pipspeakx64.png",
+        "128": "img/pipspeakx128.png",
+        "256": "img/pipspeakx256.png",
+        "512": "img/pipspeakx512.png"
     },
 
     "permissions": [
