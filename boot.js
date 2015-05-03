@@ -53,14 +53,43 @@ setInterval(function()
 					<img id='pipspeak_emote3' src='chrome-extension://akbppkonfpajpmnenablocifpbhckeoe/img/emote3.png' /> \
 					<img id='pipspeak_emote4' src='chrome-extension://akbppkonfpajpmnenablocifpbhckeoe/img/emote4.png' /> \
 					<img id='pipspeak_emote5' src='chrome-extension://akbppkonfpajpmnenablocifpbhckeoe/img/emote5.png' /></td></tr></table>\n";
+				content += "<br /><canvas id='pipspeak_graph' style='height: 200px; width: 95%;'></canvas>\n";
 				$('#pipspeak').html(content);
+
+				var barChartData = {
+					labels : ["January","February","March","April","May","June","July"],
+					datasets : [
+						{
+							fillColor : "rgba(220,220,220,0.5)",
+							strokeColor : "rgba(220,220,220,0.8)",
+							highlightFill: "rgba(220,220,220,0.75)",
+							highlightStroke: "rgba(220,220,220,1)",
+							data : [3,3,3,3,3,3,3]
+						}
+					]
+
+				}
+
+				var ctx = document.getElementById("pipspeak_graph").getContext("2d");
+				window.myBar = new Chart(ctx).Line(barChartData, {
+					responsive : true
+				});
+				$("#pipspeak_graph").height('200px');
+				$("#pipspeak_graph").width('95%');
 			}, true);
 		}   
 	}  
-}, 500);	
+}, 500);
 })
 
 setInterval(function() {
+
+	$("#pipspeak_graph").height('200px');
+	$("#pipspeak_graph").width('95%');
+
+	//var ctx = document.getElementById("pipspeak_graph").getContext("2d");
+	//ctx.canvas.width = '95%';
+	//ctx.canvas.height = '200px';
 
 	// https://github.com/borismus/keysocket/issues/63
     var video = document.getElementsByTagName('video')[0];
