@@ -33,7 +33,7 @@ var currentTime = 0;
 url = window.location.href;
 var videoID = url.substring(window.location.href.indexOf('watch?v=')+8);
 console.log(videoID);
-var ext_id = 'cdgbfcbgncddkmfphhdnmppmndjacafl'
+var ext_id = 'akbppkonfpajpmnenablocifpbhckeoe';
 var db = openDatabase('pipdb', '1.0', 'PipSpeak database', 2 * 1024 * 1024);
 
 db.transaction(function (tx) {
@@ -60,7 +60,9 @@ db.transaction(function (tx) {
 
 $(document).ready(function()
 {
+
 var url = false; 
+
 setInterval(function()
 {    
 	if(window.location.href != url) {
@@ -71,12 +73,12 @@ setInterval(function()
 				var content = "";
 				//youtube red #e52d27
 				content += "<span id='pipspeak_comment'>0:18 | This is a comment on the video.</span><br /><br />";
-				content += "<table><tr><td style='width: 100%; padding-top: 9px;'><input id='pipspeak_comment_box' name='Comment box' type='text' placeholder='Type your comment here'/></td>\n";
+				content += "<form style='display: inline;'><table><tr><td style='width: 100%; padding-top: 9px;'><input id='pipspeak_comment_box' name='Comment box' type='text' placeholder='Type your comment here'/></td>\n";
 				content += "<td style='min-width: 180px;'><img id='pipspeak_emote1' src='chrome-extension://" + ext_id + "/img/emote1.png' /> \
 					<img id='pipspeak_emote2' src='chrome-extension://" + ext_id + "/img/emote2.png' /> \
 					<img id='pipspeak_emote3' src='chrome-extension://" + ext_id + "/img/emote3.png' /> \
 					<img id='pipspeak_emote4' src='chrome-extension://" + ext_id + "/img/emote4.png' /> \
-					<img id='pipspeak_emote5' src='chrome-extension://" + ext_id + "/img/emote5.png' /></td></tr></table>\n";
+					<img id='pipspeak_emote5' src='chrome-extension://" + ext_id + "/img/emote5.png' /></td></tr></table></form>\n";
 				content += "<br /><canvas id='pipspeak_graph' style='height: 200px; width: 95%;'></canvas>\n";
 				$('#pipspeak').html(content);
 
@@ -117,5 +119,17 @@ setInterval(function() {
 	// https://github.com/borismus/keysocket/issues/63
     var video = document.getElementsByTagName('video')[0];
     currentTime = Math.floor(video.currentTime);
-    console.log(currentTime);
+    // console.log(currentTime);
 }, 1000);
+
+// doesn't work
+
+$("#pipspeak_comment_box").keyup(function (e) {
+	console.log('herp');
+    if (e.keyCode == 13) {
+    	console.log('derp');
+        var data = $('#pipspeak_comment_box').value();
+        $('#pipspeak_comment_box').value('');
+        $("#pipspeak_comment").html(currentTime + " | " + data);
+    }
+});
