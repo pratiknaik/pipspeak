@@ -42,19 +42,14 @@ db.transaction(function (tx) {
 
 var comments;
 db.transaction(function (tx) {
-	console.log('-------------------------------------------------------------------------------------')
-	tx.executeSql('INSERT INTO video (id, comment, time) VALUES ("JAUoeqvedMo", "HAHAHAHA YOU LOSER", 12)');
-	console.log('-----------------Inserted Comment----------------------------------------------------')
+	tx.executeSql('INSERT INTO video (id, comment, time) VALUES ("JAUoeqvedMo", "HAHAHAHA YOU WINNER", 5)');
 });
 
 db.transaction(function (tx) {
-	console.log('-------------Trying to fetch--------------------------');
 	tx.executeSql('SELECT * FROM video WHERE id LIKE ?', [videoID], function(tx, results) {
-		console.log('-------------Executed Fetch--------------------------');
 		var len = results.rows.length, i;
 		console.log('Found' + len + 'comments');
 		comments = results;
-		console.log(results)
 	});
 });
 
@@ -119,7 +114,11 @@ setInterval(function() {
 	// https://github.com/borismus/keysocket/issues/63
     var video = document.getElementsByTagName('video')[0];
     currentTime = Math.floor(video.currentTime);
-    // console.log(currentTime);
+    for (var i = 0; i < comments.rows.length; i++) {
+    	if(comments.rows.item(i).time == currentTime) {
+    		$('#pipspeak_comment').html(comments.rows.item(i).time + ' | ' + comments.rows.item(i).comment)
+    	}
+    }
 }, 1000);
 
 // doesn't work
