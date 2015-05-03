@@ -27,7 +27,7 @@
             "js": [
                 //"js/EnhanceNatives.js",
                 "lib/jquery.min.js",
-                "lib/Chart.min.js",
+                "lib/highcharts.js",
                 //"js/utilities.js",
                 //"view/videoStatsView.js",
                 //"model/videoStatsModel.js",

@@ -7,10 +7,23 @@
 }
 #pipspeak_comment_box {
 	width: 95%;
-	padding-top:5px;
 }
 
-#pipspeak_time {
-	background-color:#aaa;
-	margin-bottom: 10px;
+#pipspeak_comment {
+	height: 32px;
+}
+
+#pipspeak_emote1:hover, #pipspeak_emote2:hover, #pipspeak_emote3:hover, #pipspeak_emote4:hover, #pipspeak_emote5:hover {
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+}
+
+#pipspeak_comment code {
+	color: #e52d27;
+	padding: 2px 4px;
+  	white-space: nowrap;
+  	background-color: #f7f7f9;
+  	border: 1px solid #e1e1e8;
+  	margin-right: 5px;
 }
