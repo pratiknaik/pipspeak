@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "PipSpeak",
-    "description": "desc",
+    "description": "PipSpeak is a Google Chrome extension that allows users to comment on YouTube videos at specific times. The users comments are displayed at that time in the video during playback.",
     "version": "1.5.8",
 
     "homepage_url": "http://you.com",
