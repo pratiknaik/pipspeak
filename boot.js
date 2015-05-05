@@ -31,11 +31,11 @@ $.fn.waitUntilExists	= function (handler, shouldRunHandlerOnce, isChild) {
 
 // get video ID, initialize currentTime
 
-var currentTime = 0, duration = 0;
+var currentTime = 0, duration = 0, username;
 url = window.location.href;
 var videoID = url.substring(window.location.href.indexOf('watch?v=')+8);
 
-var ext_id = 'akbppkonfpajpmnenablocifpbhckeoe';
+var ext_id = 'phbefgakcenhfjdlimjabmkhppclcfie';
 
 // set up db
 
@@ -66,7 +66,7 @@ function transpose(a) {
 
 function addComment(message) {
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO video (id, comment, time) VALUES ("' + videoID + '","' + message + '",' + currentTime + ')');
+		tx.executeSql('INSERT INTO video (id, comment, time) VALUES ("' + videoID + '","<b>' + username + '</b> ' + message + '",' + currentTime + ')');
 	});
 }
 
@@ -91,10 +91,12 @@ function parseComment(time, message) {
 
 $(document).ready(function() {
 
-	// get video duration
+	// get video duration, username
 
 	var video = document.getElementsByTagName('video')[0];
 	duration = video.duration;
+	username = $('.yt-masthead-picker-name').html();
+	if(username === undefined) username = 'Anonymous';
 
 	// checks for Enter... also emote stuff
 
@@ -105,7 +107,7 @@ $(document).ready(function() {
 	        var data = $('#pipspeak_comment_box').val();
 	        $('#pipspeak_comment_box').val('');
 	        $("#pipspeak_comment").slideUp(function() {
-	        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+	        	$("#pipspeak_comment").html(parseComment(currentTime, '<b>' + username + '</b> ' + data));
         		$("#pipspeak_comment").slideDown();
 	        });
 	        addComment(data);
@@ -115,7 +117,7 @@ $(document).ready(function() {
 	$("#watch7-content").on("click", "#pipspeak_emote1", function() {
 		data = "<<1>>";
 		$("#pipspeak_comment").slideUp(function() {
-        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+        	$("#pipspeak_comment").html(parseComment(currentTime, '<b>' + username + '</b> ' + data));
     		$("#pipspeak_comment").slideDown();
         });
         addComment(data);
@@ -124,7 +126,7 @@ $(document).ready(function() {
 	$("#watch7-content").on("click", "#pipspeak_emote2", function() {
 		data = "<<2>>";
 		$("#pipspeak_comment").slideUp(function() {
-        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+        	$("#pipspeak_comment").html(parseComment(currentTime, '<b>' + username + '</b> ' + data));
     		$("#pipspeak_comment").slideDown();
         });
         addComment(data);
@@ -133,7 +135,7 @@ $(document).ready(function() {
 	$("#watch7-content").on("click", "#pipspeak_emote3", function() {
 		data = "<<3>>";
 		$("#pipspeak_comment").slideUp(function() {
-        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+        	$("#pipspeak_comment").html(parseComment(currentTime, '<b>' + username + '</b> ' + data));
     		$("#pipspeak_comment").slideDown();
         });
         addComment(data);
@@ -142,7 +144,7 @@ $(document).ready(function() {
 	$("#watch7-content").on("click", "#pipspeak_emote4", function() {
 		data = "<<4>>";
 		$("#pipspeak_comment").slideUp(function() {
-        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+        	$("#pipspeak_comment").html(parseComment(currentTime, '<b>' + username + '</b> ' + data));
     		$("#pipspeak_comment").slideDown();
         });
         addComment(data);
@@ -151,7 +153,7 @@ $(document).ready(function() {
 	$("#watch7-content").on("click", "#pipspeak_emote5", function() {
 		data = "<<5>>";
 		$("#pipspeak_comment").slideUp(function() {
-        	$("#pipspeak_comment").html(parseComment(currentTime, data));
+        	$("#pipspeak_comment").html(parseComment(currentTime, '<b>' + username + '</b> ' + data));
     		$("#pipspeak_comment").slideDown();
         });
         addComment(data);
@@ -263,7 +265,7 @@ $(document).ready(function() {
 					// $("#pipspeak_graph").width('95%');
 				}, true);
 			}   
-		}  
+		}
 	}, 500);
 });
 
