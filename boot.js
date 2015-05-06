@@ -35,7 +35,7 @@ var currentTime = 0, duration = 0, username;
 url = window.location.href;
 var videoID = url.substring(window.location.href.indexOf('watch?v=')+8);
 
-var ext_id = 'phbefgakcenhfjdlimjabmkhppclcfie';
+var ext_id = 'akbppkonfpajpmnenablocifpbhckeoe';
 
 // set up db
 
@@ -91,10 +91,8 @@ function parseComment(time, message) {
 
 $(document).ready(function() {
 
-	// get video duration, username
+	//get username
 
-	var video = document.getElementsByTagName('video')[0];
-	duration = video.duration;
 	username = $('.yt-masthead-picker-name').html();
 	if(username === undefined) username = 'Anonymous';
 
@@ -182,6 +180,12 @@ $(document).ready(function() {
 					content += "<br /><div id='pipspeak_graph' style='height: 150px; width: 100%;'></div>\n";
 					$('#pipspeak').html(content);
 
+					// get video duration, username
+
+					var video = document.getElementsByTagName('video')[0];
+					duration = video.duration;
+					// console.log(duration);
+
 					var numPoints = 100.0;
 					var labels = [];
 					var numLabels = [];
@@ -261,12 +265,16 @@ $(document).ready(function() {
 				            data: transpose([numLabels, frequency])
 				        }]
 				    });
+
+					$("#pipspeak_comment").slideUp();
+					// console.log(numLabels);
+					// console.log(frequency);
 					// $("#pipspeak_graph").height('100px');
 					// $("#pipspeak_graph").width('95%');
 				}, true);
 			}   
 		}
-	}, 500);
+	}, 1000);
 });
 
 // updates every second
@@ -287,6 +295,7 @@ setInterval(function() {
     var message = "";
     for (var i = 0; i < comments.rows.length; i++) {
     	if(comments.rows.item(i).time == currentTime) {
+    		$("#pipspeak_comment").slideDown();
     		if(lastCurTime == currentTime) {
     			if(message === "") message = comments.rows.item(i).comment;
 				else message += " | " + comments.rows.item(i).comment;
